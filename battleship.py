@@ -1,6 +1,7 @@
 import pygame as pg
 from random import *
 import time
+import sys
 
 pg.init()
 
@@ -143,7 +144,7 @@ while True:
   if left_clicked == True:#makes it so that after the user left clicks it doesn't stay at left clicked forever
     num_left_clicks += 1
     left_clicked = False
-  for event in pg.event.get():#the code for the clicks
+  for event in pg.event.get():#the code for the clicks and to quit
     if event.type == pg.MOUSEMOTION:
       mouse_x = pg.mouse.get_pos()[0]
       mouse_y = pg.mouse.get_pos()[1]
@@ -326,6 +327,9 @@ while True:#this loop is the back and forth part of the game
     if left_clicked:#makes it so that left_clicked isnt true forever after being clicked
       left_clicked = False
     for event in pg.event.get():#the code for the clicks
+      if event.type == pg.QUIT:
+        pg.quit()
+        sys.exit()
       if event.type == pg.MOUSEMOTION:
         mouse_x = pg.mouse.get_pos()[0]
         mouse_y = pg.mouse.get_pos()[1]
@@ -450,6 +454,10 @@ if who_won == "computer":#for computer win
     text_rect.centerx = 600/2 #centers the "You Win!" text
     text_rect.centery = 600/2 #centers the "You Win!" text
     screen.blit(text, text_rect)
+    for event in pg.event.get():#the code to quit by closing
+      if event.type == pg.QUIT:
+        pg.quit()
+        sys.exit()
     pg.display.update()
 
 
@@ -465,4 +473,8 @@ elif who_won == "player":#for player win
     text_rect.centerx = 600/2 #centers the "You Win!" text
     text_rect.centery = 600/2 #centers the "You Win!" text
     screen.blit(text, text_rect)
+    for event in pg.event.get():#the code to quit by closing
+      if event.type == pg.QUIT:
+        pg.quit()
+        sys.exit()
     pg.display.update()
